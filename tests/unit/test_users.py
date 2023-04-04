@@ -1,7 +1,7 @@
 from factory import DictFactory
 from factory.fuzzy import FuzzyText, FuzzyInteger, FuzzyFloat
 
-from io_lottery.app import add_user, get_user, app
+from io_lottery.app import add_user, get_user, app, upgrade_user, put_user
 
 
 class UserPayloadFactory(DictFactory):
@@ -22,4 +22,21 @@ def test_returns_sent_user() -> None:
 
 def test_returns_unimplemented() -> None:
     actual = get_user()
+    assert actual.status_code == 501
+
+
+def test_returns_unimplemented_on_put_user() -> None:
+    actual = put_user(24)
+    assert actual.status_code == 200
+
+def test_returns_unimplemented_on_delete_user() -> None:
+    actual = delete_user(24)
+    assert actual.status_code == 200
+
+def test_returns_unimplemented_on_patch_user() -> None:
+    actual = patch_user(24)
+    assert actual.status_code == 200
+
+def test_upgrade_user() -> None:
+    actual = upgrade_user(24)
     assert actual.status_code == 501

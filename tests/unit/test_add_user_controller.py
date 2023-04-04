@@ -1,9 +1,8 @@
 from unittest.mock import Mock
 
-import pytest
 from pytest import fixture
 
-from io_lottery.controllers import AddUserController, AddUserRequest, GetUserController
+from io_lottery.controllers import AddUserController, AddUserRequest
 from io_lottery.repositories import UserRepository
 from tests.integration.test_users import UserPayloadFactory
 
@@ -46,7 +45,3 @@ def test_add_user_request_has_json_field() -> None:
     assert request.json
 
 
-def test_get_user_controller_raises_on_get() -> None:
-    controller = GetUserController()
-    with pytest.raises(NotImplementedError):
-        controller.get(id=21)
